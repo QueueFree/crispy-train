@@ -7,6 +7,8 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    objects = models.Manager()
+
 
 class Post(models.Model):
     image = models.ImageField(null=True, blank=True)
@@ -14,7 +16,7 @@ class Post(models.Model):
     content = models.TextField(null=True, blank=True)
     rate = models.IntegerField(max_length=2, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField(Tag, related_name='posts')
 
     def __str__(self):

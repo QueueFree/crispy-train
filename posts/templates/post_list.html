@@ -1,5 +1,11 @@
+{% extends 'base.html' %}
+
 {% block content %}
 <body>
+    <form action="/posts/" method="get">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+    </form>
     {% for post in posts %}
 <div class="card" style="width: 18rem;">
 {% if post.image %}
@@ -17,5 +23,14 @@
   </div>
 </div>
     {% endfor %}
+    <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 20px">
+      {% for i in max_pages %}
+      {% if request.GET %}
+      <a class="btn btn-primary" href="{{ request.get_full_path }}&page={{ i }}">{{ i }}</a>
+      {% else %}
+      <a class="btn btn-primary" href="/posts/?page={{ i }}">{{ i }}</a>
+      {% endif %}
+       {% endfor %}
+    </div>
 {% endblock %}
 </body>
